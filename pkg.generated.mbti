@@ -1,0 +1,50 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Hhsqoo/moonbitTolerance"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn negative_direction() -> Direction
+
+// Errors
+
+// Types and methods
+pub struct AnalysisResult {
+  nominal : Double
+  lower : Double
+  upper : Double
+  mean : Double
+  standard_deviation : Double
+  yield_rate : Double
+  sensitivity : Array[(String, Double)]
+} derive(@debug.Debug)
+
+pub struct Chain {
+  name : String
+  dimensions : Array[Dimension]
+} derive(@debug.Debug)
+pub fn Chain::monte_carlo(Self, Int, seed? : UInt) -> AnalysisResult
+pub fn Chain::new(String, Array[Dimension]) -> Self
+pub fn Chain::nominal(Self) -> Double
+pub fn Chain::rss(Self) -> AnalysisResult
+pub fn Chain::worst_case(Self) -> AnalysisResult
+
+pub struct Dimension {
+  name : String
+  nominal : Double
+  tolerance : Double
+  direction : Direction
+} derive(Eq, @debug.Debug)
+pub fn Dimension::new(String, Double, Double, direction? : Direction) -> Self
+
+pub enum Direction {
+  Positive
+  Negative
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
+
