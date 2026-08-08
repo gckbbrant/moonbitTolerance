@@ -1,0 +1,5 @@
+import {
+  "Hhsqoo/moonbitTolerance" @lib,
+}
+
+pkgtype(kind: "executable")
