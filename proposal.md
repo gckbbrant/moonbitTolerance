@@ -19,3 +19,8 @@ MoonBit 的代数数据类型适合表达尺寸方向和后续 GD&T 约束，轻
 ## 计划与验收
 
 第一阶段完成核心类型及极值/RSS；第二阶段完成确定性蒙特卡洛、敏感度和 CLI；第三阶段补充文档、CI、示例和 Mooncakes 发布准备。验收标准是新用户能按 README 在本地运行示例，核心测试在 wasm-gc 后端通过，结果对固定种子稳定，公共接口具备进一步接入二维链和 GD&T 的空间。
+
+## 仓库
+
+- GitHub: https://github.com/gckbbrant/moonbitTolerance
+- GitLink: https://gitlink.org.cn/gckbbrant/moonbitTolerance
