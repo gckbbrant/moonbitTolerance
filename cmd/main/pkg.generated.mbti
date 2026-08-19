@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "Hhsqoo/moonbitTolerance/cmd/main"
+package "gckbbrant/moonbitTolerance/cmd/main"
 
 // Values
 
@@ -10,4 +10,3 @@ package "Hhsqoo/moonbitTolerance/cmd/main"
 // Type aliases
 
 // Traits
-

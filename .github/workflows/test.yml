@@ -6,18 +6,50 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install MoonBit
+    name: Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    defaults:
+      run:
         shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install MoonBit on Unix
+        if: runner.os != 'Windows'
         run: |
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
-      - name: Format and check
+
+      - name: Install MoonBit on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+          irm https://cli.moonbitlang.com/install/powershell.ps1 | iex
+          echo "$HOME/.moon/bin" | Out-File -FilePath $env:GITHUB_PATH -Append
+
+      - name: Format and type check
         run: |
           moon fmt --check
           moon check --deny-warn
+
+      - name: Generate and verify public interface
+        run: |
           moon info
-      - name: Test
-        run: moon test --target wasm-gc --deny-warn
+          git diff --exit-code -- pkg.generated.mbti cmd/main/pkg.generated.mbti
+
+      - name: Test wasm-gc with coverage
+        run: |
+          moon test --target wasm-gc --deny-warn --enable-coverage
+          moon coverage report -f summary
+          moon coverage analyze
+      - name: Test native with coverage
+        run: |
+          moon test --target native --deny-warn --enable-coverage
+          moon coverage report -f summary
+          moon coverage analyze

@@ -1,12 +1,50 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "Hhsqoo/moonbitTolerance"
+package "gckbbrant/moonbitTolerance"
 
 import {
   "moonbitlang/core/debug",
 }
 
 // Values
+pub fn benchmark_suite() -> Array[BenchmarkCase]
+
+pub fn calibration_point_count() -> Int
+
+pub fn calibration_points() -> Array[CalibrationPoint]
+
+pub fn corrected_measurement(CalibrationPoint, Double) -> Double
+
+pub fn deterministic_uniform(UInt) -> (UInt, Double)
+
+pub fn evaluate_constraints(AnalysisResult, Array[GapConstraint]) -> ConstraintReport
+
+pub fn interval_contains(AnalysisResult, Double) -> Bool
+
+pub fn interval_width(AnalysisResult) -> Double
+
 pub fn negative_direction() -> Direction
+
+pub fn normal_approximation_policy(seed? : UInt) -> SamplingPolicy
+
+pub fn project_chain(Array[ProjectedDimension]) -> ProjectedResult
+
+pub fn project_direction(Double) -> Vector2
+
+pub fn project_signed(Double, Double) -> Vector2
+
+pub fn reference_vectors() -> Array[ReferenceVector]
+
+pub fn result_to_csv(AnalysisResult) -> String
+
+pub fn run_benchmark_case(BenchmarkCase, Int) -> AnalysisResult
+
+pub fn sample_deviation(SamplingPolicy, Double, Double) -> Double
+
+pub fn standard_profile_count() -> Int
+
+pub fn standard_profiles() -> Array[StandardProfile]
+
+pub fn triangular_policy(seed? : UInt) -> SamplingPolicy
 
 // Errors
 
@@ -21,6 +59,23 @@ pub struct AnalysisResult {
   sensitivity : Array[(String, Double)]
 } derive(@debug.Debug)
 
+pub struct BenchmarkCase {
+  name : String
+  dimensions : Int
+  tolerance : Double
+  seed : UInt
+} derive(@debug.Debug)
+pub fn BenchmarkCase::chain(Self) -> Chain
+
+pub struct CalibrationPoint {
+  instrument : String
+  axis : String
+  nominal : Double
+  bias : Double
+  repeatability : Double
+  confidence : Double
+} derive(@debug.Debug)
+
 pub struct Chain {
   name : String
   dimensions : Array[Dimension]
@@ -30,6 +85,19 @@ pub fn Chain::new(String, Array[Dimension]) -> Self
 pub fn Chain::nominal(Self) -> Double
 pub fn Chain::rss(Self) -> AnalysisResult
 pub fn Chain::worst_case(Self) -> AnalysisResult
+
+pub struct ConstraintReport {
+  passed : Int
+  failed : Int
+  inconclusive : Int
+  statuses : Array[(String, ConstraintStatus)]
+} derive(@debug.Debug)
+
+pub enum ConstraintStatus {
+  Satisfied
+  Violated
+  Inconclusive
+} derive(Eq, @debug.Debug)
 
 pub struct Dimension {
   name : String
@@ -44,7 +112,88 @@ pub enum Direction {
   Negative
 } derive(Eq, @debug.Debug)
 
+pub enum Distribution {
+  Uniform
+  Triangular
+  NormalApproximation
+} derive(Eq, @debug.Debug)
+
+pub struct GapConstraint {
+  name : String
+  minimum : Double
+  maximum : Double
+} derive(@debug.Debug)
+pub fn GapConstraint::evaluate(Self, AnalysisResult) -> ConstraintStatus
+pub fn GapConstraint::new(String, Double, Double) -> Self
+
+pub struct ProcessCapability {
+  lower_spec : Double
+  upper_spec : Double
+  mean : Double
+  standard_deviation : Double
+} derive(@debug.Debug)
+pub fn ProcessCapability::cp(Self) -> Double
+pub fn ProcessCapability::cpk(Self) -> Double
+pub fn ProcessCapability::cpl(Self) -> Double
+pub fn ProcessCapability::cpu(Self) -> Double
+pub fn ProcessCapability::new(Double, Double, Double, Double) -> Self
+
+pub struct ProjectedDimension {
+  name : String
+  vector : Vector2
+  tolerance : Double
+} derive(@debug.Debug)
+pub fn ProjectedDimension::new(String, Vector2, Double) -> Self
+
+pub struct ProjectedResult {
+  nominal : Vector2
+  lower_x : Double
+  upper_x : Double
+  lower_y : Double
+  upper_y : Double
+  radial_tolerance : Double
+  sensitivity : Array[(String, Double)]
+} derive(@debug.Debug)
+
+pub struct ReferenceVector {
+  dimensions : Int
+  tolerance : Double
+  nominal : Double
+  worst_lower : Double
+  worst_upper : Double
+  rss_sigma : Double
+} derive(@debug.Debug)
+
+pub struct SamplingPolicy {
+  distribution : Distribution
+  sigma_factor : Double
+  seed : UInt
+} derive(@debug.Debug)
+pub fn SamplingPolicy::new(distribution? : Distribution, sigma_factor? : Double, seed? : UInt) -> Self
+
+pub struct StandardProfile {
+  code : String
+  family : String
+  nominal_mm : Double
+  tolerance_mm : Double
+  cpk_target : Double
+  sample_count : Int
+} derive(@debug.Debug)
+
+pub struct Vector2 {
+  x : Double
+  y : Double
+} derive(Eq, @debug.Debug)
+pub fn Vector2::add(Self, Self) -> Self
+pub fn Vector2::dot(Self, Self) -> Double
+pub fn Vector2::length(Self) -> Double
+pub fn Vector2::length_squared(Self) -> Double
+pub fn Vector2::new(Double, Double) -> Self
+pub fn Vector2::normalize(Self) -> Self
+pub fn Vector2::scale(Self, Double) -> Self
+pub fn Vector2::sub(Self, Self) -> Self
+pub fn Vector2::zero() -> Self
+
 // Type aliases
 
 // Traits
-
