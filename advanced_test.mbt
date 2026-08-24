@@ -75,9 +75,10 @@ test "nominal and projected input paths" {
 ///|
 test "benchmark suite is reproducible" {
   for case in benchmark_suite() {
-    let first = run_benchmark_case(case, 256)
-    let second = run_benchmark_case(case, 256)
+    let first = run_acceptance_benchmark_case(case, 256)
+    let second = run_acceptance_benchmark_case(case, 256)
     assert_eq(first.mean, second.mean)
     assert_eq(first.yield_rate, second.yield_rate)
+    assert_true(first.yield_rate >= 0.0 && first.yield_rate <= 1.0)
   }
 }

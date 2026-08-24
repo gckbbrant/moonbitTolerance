@@ -1,8 +1,10 @@
 # Roadmap
 
-1. Add projected two-dimensional chains while retaining the one-dimensional API.
-2. Add pluggable probability distributions and process capability inputs.
-3. Add JSON and CSV adapters in a separate package.
-4. Add constraint objects for gaps and GD&T-oriented checks after the numeric core is stable.
+The current release covers the first engineering workflow: one- and two-dimensional tolerance propagation, deterministic sampling, inspection analytics, fit/GD&T-style checks, uncertainty budgets, and CSV boundary adapters.
 
-Each item is intentionally downstream of the current calculation kernel, so a future release can grow without changing the meaning of existing analysis methods.
+Future work is intentionally focused on interoperability rather than larger fixture collections:
+
+1. Add a documented JSON adapter package without coupling the calculation kernel to a CAD schema.
+2. Add optional correlation-matrix and covariance import helpers for measurement systems.
+3. Add property-based generators for dimension chains and cross-backend numerical differential checks.
+4. Add examples that connect the public API to a CAD or inspection host while retaining deterministic core behavior.

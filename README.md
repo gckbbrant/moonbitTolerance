@@ -14,7 +14,11 @@ Deterministic mechanical tolerance stack-up analysis for MoonBit. The library is
 - Process capability indices (`Cp`, `Cpu`, `Cpl`, and `Cpk`).
 - Gap constraints with satisfied, violated, and inconclusive outcomes.
 - CSV result export for small downstream reporting adapters.
-- Reusable process profiles, calibration points, and deterministic regression vectors.
+- Acceptance-window simulation summaries with deterministic seeds.
+- Conservative interval arithmetic, correlation-aware RSS propagation, and uncertainty budgets.
+- Hole/shaft fit classification, datum-frame feature checks, specification reports, and gauge R&R studies.
+- Scenario comparison, process trends, sample-size planning, tolerance allocation, and tightening recommendations.
+- Millimeter/inch/micrometer normalization with engineering-safe reporting rounding.
 - Native CLI demonstration and benchmark suite.
 
 ## Quick start
@@ -43,7 +47,7 @@ let result = chain.monte_carlo(10000, seed=42U)
 
 ## Architecture
 
-The root package owns the public engineering types. `tolerance.mbt` contains the one-dimensional kernel; `geometry.mbt` contains vector projection; `distributions.mbt` contains sampling and capability calculations; `constraints.mbt` contains interval checks and CSV output. The catalog files contain structured, inspectable reference inputs rather than hidden runtime state. `cmd/main` is an executable consumer of the package.
+The root package owns the public engineering types. `tolerance.mbt` contains the one-dimensional kernel; `interval.mbt`, `geometry.mbt`, `matrix.mbt`, and `correlation.mbt` contain conservative numeric propagation; `distributions.mbt`, `simulation.mbt`, `scenario.mbt`, and `planning.mbt` contain deterministic analysis workflows; `statistics.mbt`, `engineering.mbt`, `measurement.mbt`, `capability.mbt`, and `process.mbt` contain inspection and process analytics; `assembly.mbt`, `gdt.mbt`, `geometric.mbt`, and `specification.mbt` contain manufacturing acceptance checks; `allocation.mbt`, `optimizer.mbt`, `uncertainty.mbt`, `units.mbt`, and `rounding.mbt` support design decisions and host integration. `reporting.mbt` and `validation.mbt` keep text output and preflight checks at the boundary. `cmd/main` is an executable consumer of the package.
 
 ## Benchmark
 
@@ -53,7 +57,7 @@ The benchmark suite uses the same public API as an application: five chains with
 moon run cmd/main
 ```
 
-The output is deterministic for a fixed toolchain, sample count, and seed. The repository does not claim a hardware-independent throughput number; wall-clock measurements belong to the machine and backend that produced them. The checked-in reference vector corpus is a deterministic regression fixture, not a measurement claim.
+The output is deterministic for a fixed toolchain, sample count, and seed. The acceptance window is deliberately narrower than the physical worst-case interval so the benchmark exercises both passing and failing samples. The repository does not claim a hardware-independent throughput number; wall-clock measurements belong to the machine and backend that produced them.
 
 ## Testing
 
@@ -65,7 +69,7 @@ moon test --target native --deny-warn
 moon info
 ```
 
-Tests cover invalid inputs, signed dimensions, deterministic sampling, projection boundaries, process capability edges, constraints, calibration correction, and reference corpus shape.
+Tests cover invalid-input guards, signed dimensions, deterministic sampling, distribution differences, acceptance-window yield, interval arithmetic, covariance and correlation propagation, quantiles, process capability edges, measurement studies, fit classification, datum-frame checks, trend analysis, allocation planning, units, reporting, and constraints.
 
 ## CI
 

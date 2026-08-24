@@ -31,6 +31,18 @@ pub fn run_benchmark_case(
 }
 
 ///|
+pub fn run_acceptance_benchmark_case(
+  case : BenchmarkCase,
+  samples : Int,
+) -> SimulationSummary {
+  let chain = case.chain()
+  let nominal = chain.nominal()
+  let half_width = case.tolerance * case.dimensions.to_double().sqrt() * 0.8
+  let window = AcceptanceWindow::new(nominal - half_width, nominal + half_width)
+  chain.simulate(samples, SamplingPolicy::new(seed=case.seed), window)
+}
+
+///|
 pub fn benchmark_suite() -> Array[BenchmarkCase] {
   [
     { name: "small-fit", dimensions: 4, tolerance: 0.02, seed: 11U },

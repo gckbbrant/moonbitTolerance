@@ -78,6 +78,54 @@ pub fn deterministic_uniform(seed : UInt) -> (UInt, Double) {
 }
 
 ///|
+pub fn sample_deviation_with_state(
+  policy : SamplingPolicy,
+  state : UInt,
+  tolerance : Double,
+) -> (UInt, Double) {
+  if tolerance < 0.0 {
+    abort("tolerance must be non-negative")
+  }
+  match policy.distribution {
+    Uniform | Triangular => {
+      let (next, unit) = deterministic_uniform(state)
+      (next, sample_deviation(policy, unit, tolerance))
+    }
+    NormalApproximation => {
+      // The Irwin-Hall construction uses twelve uniforms and has unit variance.
+      let mut current = state
+      let mut total = 0.0
+      for _ in 0..<12 {
+        let (next, unit) = deterministic_uniform(current)
+        current = next
+        total += unit
+      }
+      let standard_normal = total - 6.0
+      (current, standard_normal * tolerance / policy.sigma_factor)
+    }
+  }
+}
+
+///|
+pub fn sample_sequence(
+  policy : SamplingPolicy,
+  count : Int,
+  tolerance : Double,
+) -> Array[Double] {
+  if count < 0 {
+    abort("count must be non-negative")
+  }
+  let values = []
+  let mut state = policy.seed
+  for _ in 0..<count {
+    let (next, value) = sample_deviation_with_state(policy, state, tolerance)
+    state = next
+    values.push(value)
+  }
+  values
+}
+
+///|
 pub struct ProcessCapability {
   lower_spec : Double
   upper_spec : Double

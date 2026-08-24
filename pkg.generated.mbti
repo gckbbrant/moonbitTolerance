@@ -6,25 +6,109 @@ import {
 }
 
 // Values
+pub fn acceptance_simulation_method() -> ScenarioMethod
+
+pub fn allocate_chain(Chain, Double, AllocationStrategy) -> AllocationReport
+
+pub fn allocation_to_csv(AllocationReport) -> String
+
+pub fn analyze_fit(Dimension, Dimension) -> FitAnalysis
+
 pub fn benchmark_suite() -> Array[BenchmarkCase]
 
-pub fn calibration_point_count() -> Int
+pub fn capability_report(Array[Double], AcceptanceWindow) -> CapabilityReport
 
-pub fn calibration_points() -> Array[CalibrationPoint]
+pub fn capability_to_csv(CapabilityReport) -> String
 
-pub fn corrected_measurement(CalibrationPoint, Double) -> Double
+pub fn centering_margin(Double, AcceptanceWindow) -> Double
+
+pub fn chain_interval(Chain) -> Interval
+
+pub fn classify_clearance(Interval) -> FitClassification
+
+pub fn combine_validation(ValidationReport, ValidationReport) -> ValidationReport
+
+pub fn compare_scenarios(ScenarioResult, ScenarioResult) -> ScenarioComparison
+
+pub fn concentricity_tolerance(Double) -> GeometricTolerance
+
+pub fn control_limit_violations(Array[Double], ControlLimits) -> Int
+
+pub fn control_limits(Array[Double], sigma_multiplier? : Double) -> ControlLimits
+
+pub fn correlated_interval(Chain, Array[CorrelationTerm], Double) -> Interval
+
+pub fn correlated_rss(Array[Dimension], Array[CorrelationTerm]) -> CorrelatedRSSReport
+
+pub fn correlated_standard_deviation(Chain, Array[CorrelationTerm]) -> Double
+
+pub fn covariance_of(Array[ProjectedDimension]) -> Covariance2
+
+pub fn defects_per_million(ProcessPerformance) -> Double
 
 pub fn deterministic_uniform(UInt) -> (UInt, Double)
 
+pub fn dimension_interval(Dimension) -> Interval
+
+pub fn down_rounding() -> RoundingMode
+
+pub fn equal_allocation() -> AllocationStrategy
+
+pub fn equal_rss_budget(Chain, Double) -> Array[(String, Double)]
+
+pub fn equal_tolerance_for_budget(Chain, Double) -> AllocationReport
+
+pub fn estimate_yield(Array[Double], AcceptanceWindow) -> YieldEstimate
+
 pub fn evaluate_constraints(AnalysisResult, Array[GapConstraint]) -> ConstraintReport
+
+pub fn evaluate_feature(FeatureControlFrame, FeatureMeasurement) -> FeatureEvaluation
+
+pub fn evaluate_features(Array[FeatureControlFrame], Array[FeatureMeasurement]) -> FeatureEvaluationReport
+
+pub fn evaluate_fit_requirements(FitAnalysis, Array[FitRequirement]) -> FitRequirementReport
+
+pub fn evaluate_specification(Array[Double], Specification) -> SpecificationReport
+
+pub fn feasibility_report(Chain, AcceptanceWindow) -> FeasibilityReport
+
+pub fn fit_to_csv(FitAnalysis) -> String
+
+pub fn gauge_rr(Array[Double], Int, Int, Int, Double) -> GaugeRRReport
+
+pub fn histogram(Array[Double], Int) -> Histogram
+
+pub fn histogram_to_csv(Histogram) -> String
+
+pub fn inspect_batch(Array[Double], AcceptanceWindow) -> InspectionReport
 
 pub fn interval_contains(AnalysisResult, Double) -> Bool
 
 pub fn interval_width(AnalysisResult) -> Double
 
+pub fn linear_trend(Array[Double]) -> TrendReport
+
+pub fn mean_absolute_error(Array[Double], Double) -> Double
+
+pub fn measurement_bias(Array[Double], Double) -> BiasReport
+
+pub fn measurement_yield(Array[Double], AcceptanceWindow) -> Double
+
+pub fn monte_carlo_method() -> ScenarioMethod
+
+pub fn moving_average(Array[Double], Int) -> Array[Double]
+
+pub fn nearest_rounding() -> RoundingMode
+
 pub fn negative_direction() -> Direction
 
 pub fn normal_approximation_policy(seed? : UInt) -> SamplingPolicy
+
+pub fn outlier_indices(Array[Double], Double, Double) -> Array[Int]
+
+pub fn position_tolerance(Double) -> GeometricTolerance
+
+pub fn process_performance(Array[Double], AcceptanceWindow) -> ProcessPerformance
 
 pub fn project_chain(Array[ProjectedDimension]) -> ProjectedResult
 
@@ -32,23 +116,118 @@ pub fn project_direction(Double) -> Vector2
 
 pub fn project_signed(Double, Double) -> Vector2
 
-pub fn reference_vectors() -> Array[ReferenceVector]
+pub fn projected_standard_deviation(Covariance2, Vector2) -> Double
+
+pub fn proportional_allocation() -> AllocationStrategy
+
+pub fn propose_tightening(Chain, Double, Int) -> Array[TighteningItem]
+
+pub fn quantile(Array[Double], Double) -> Double
+
+pub fn required_rss_budget(Chain, AcceptanceWindow, Double) -> Double
 
 pub fn result_to_csv(AnalysisResult) -> String
 
+pub fn round_interval(Interval, Int) -> Interval
+
+pub fn round_statistics(SampleStatistics, Int) -> SampleStatistics
+
+pub fn round_to(Double, Int, RoundingMode) -> Double
+
+pub fn round_values(Array[Double], Int, RoundingMode) -> Array[Double]
+
+pub fn rss_budget_is_feasible(Chain, AcceptanceWindow, Double, Double) -> Bool
+
+pub fn rss_method() -> ScenarioMethod
+
+pub fn run_acceptance_benchmark_case(BenchmarkCase, Int) -> SimulationSummary
+
 pub fn run_benchmark_case(BenchmarkCase, Int) -> AnalysisResult
+
+pub fn run_scenario(ScenarioSpec) -> ScenarioResult
+
+pub fn running_statistics(Array[Double]) -> RunningStatistics
+
+pub fn runout_tolerance(Double) -> GeometricTolerance
 
 pub fn sample_deviation(SamplingPolicy, Double, Double) -> Double
 
-pub fn standard_profile_count() -> Int
+pub fn sample_deviation_with_state(SamplingPolicy, UInt, Double) -> (UInt, Double)
 
-pub fn standard_profiles() -> Array[StandardProfile]
+pub fn sample_plan(Double, Double, Double) -> SamplePlan
+
+pub fn sample_sequence(SamplingPolicy, Int, Double) -> Array[Double]
+
+pub fn scenario_to_csv(ScenarioResult) -> String
+
+pub fn sensitivity_allocation() -> AllocationStrategy
+
+pub fn sensitivity_items(AnalysisResult) -> Array[SensitivityItem]
+
+pub fn sensitivity_tolerance_for_budget(Chain, Double) -> AllocationReport
+
+pub fn simulation_to_csv(SimulationSummary) -> String
+
+pub fn summarize_samples(Array[Double]) -> SampleStatistics
+
+pub fn tightening_plan(Chain, Double) -> TighteningPlan
+
+pub fn toward_zero_rounding() -> RoundingMode
 
 pub fn triangular_policy(seed? : UInt) -> SamplingPolicy
+
+pub fn uncertainty_budget(Array[UncertaintySource]) -> UncertaintyBudget
+
+pub fn uncertainty_to_csv(UncertaintyBudget) -> String
+
+pub fn uncertainty_without(UncertaintyBudget, String) -> Double
+
+pub fn up_rounding() -> RoundingMode
+
+pub fn validate_chain(Chain) -> ValidationReport
+
+pub fn validate_measurements(Array[Double], AcceptanceWindow) -> ValidationReport
+
+pub fn validate_window(AcceptanceWindow) -> ValidationReport
+
+pub fn within_control_limits(Double, ControlLimits) -> Bool
+
+pub fn worst_case_method() -> ScenarioMethod
 
 // Errors
 
 // Types and methods
+pub struct AcceptanceWindow {
+  lower : Double
+  upper : Double
+} derive(Eq, @debug.Debug)
+pub fn AcceptanceWindow::contains(Self, Double) -> Bool
+pub fn AcceptanceWindow::new(Double, Double) -> Self
+
+pub struct AllocationItem {
+  name : String
+  nominal : Double
+  allocated_tolerance : Double
+  variance_fraction : Double
+  weight : Double
+} derive(Eq, @debug.Debug)
+
+pub struct AllocationReport {
+  items : Array[AllocationItem]
+  total_nominal : Double
+  total_rss : Double
+  worst_case_span : Double
+  strategy : AllocationStrategy
+} derive(Eq, @debug.Debug)
+pub fn AllocationReport::interval(Self) -> Interval
+pub fn AllocationReport::largest_contributor(Self) -> AllocationItem
+
+pub enum AllocationStrategy {
+  Equal
+  Proportional
+  Sensitivity
+} derive(Eq, @debug.Debug)
+
 pub struct AnalysisResult {
   nominal : Double
   lower : Double
@@ -59,6 +238,16 @@ pub struct AnalysisResult {
   sensitivity : Array[(String, Double)]
 } derive(@debug.Debug)
 
+pub struct Angle {
+  radians : Double
+} derive(Eq, @debug.Debug)
+pub fn Angle::add(Self, Self) -> Self
+pub fn Angle::direction(Self) -> Vector2
+pub fn Angle::from_degrees(Double) -> Self
+pub fn Angle::from_radians(Double) -> Self
+pub fn Angle::to_degrees(Self) -> Double
+pub fn Angle::to_radians(Self) -> Double
+
 pub struct BenchmarkCase {
   name : String
   dimensions : Int
@@ -67,14 +256,23 @@ pub struct BenchmarkCase {
 } derive(@debug.Debug)
 pub fn BenchmarkCase::chain(Self) -> Chain
 
-pub struct CalibrationPoint {
-  instrument : String
-  axis : String
-  nominal : Double
+pub struct BiasReport {
+  count : Int
+  reference : Double
+  mean : Double
   bias : Double
-  repeatability : Double
-  confidence : Double
-} derive(@debug.Debug)
+  standard_deviation : Double
+  maximum_absolute_error : Double
+} derive(Eq, @debug.Debug)
+
+pub struct CapabilityReport {
+  statistics : SampleStatistics
+  cp : Double
+  cpu : Double
+  cpl : Double
+  cpk : Double
+  observed_yield : Double
+} derive(Eq, @debug.Debug)
 
 pub struct Chain {
   name : String
@@ -84,6 +282,7 @@ pub fn Chain::monte_carlo(Self, Int, seed? : UInt) -> AnalysisResult
 pub fn Chain::new(String, Array[Dimension]) -> Self
 pub fn Chain::nominal(Self) -> Double
 pub fn Chain::rss(Self) -> AnalysisResult
+pub fn Chain::simulate(Self, Int, SamplingPolicy, AcceptanceWindow) -> SimulationSummary
 pub fn Chain::worst_case(Self) -> AnalysisResult
 
 pub struct ConstraintReport {
@@ -98,6 +297,51 @@ pub enum ConstraintStatus {
   Violated
   Inconclusive
 } derive(Eq, @debug.Debug)
+
+pub struct ControlLimits {
+  center : Double
+  lower : Double
+  upper : Double
+  standard_deviation : Double
+  sigma_multiplier : Double
+} derive(Eq, @debug.Debug)
+
+pub struct CorrelatedRSSReport {
+  independent_variance : Double
+  correlation_adjustment : Double
+  variance : Double
+  standard_deviation : Double
+} derive(Eq, @debug.Debug)
+
+pub struct CorrelationTerm {
+  first : Int
+  second : Int
+  coefficient : Double
+} derive(Eq, @debug.Debug)
+pub fn CorrelationTerm::new(Int, Int, Double) -> Self
+
+pub struct Covariance2 {
+  xx : Double
+  xy : Double
+  yy : Double
+} derive(Eq, @debug.Debug)
+pub fn Covariance2::variance_along(Self, Vector2) -> Double
+
+pub struct DatumFrame {
+  primary : DatumReference
+  secondary : DatumReference
+  tertiary : DatumReference
+} derive(Eq, @debug.Debug)
+pub fn DatumFrame::is_complete(Self) -> Bool
+pub fn DatumFrame::label(Self) -> String
+pub fn DatumFrame::new(DatumReference, DatumReference, DatumReference) -> Self
+pub fn DatumFrame::single(DatumReference) -> Self
+
+pub struct DatumReference {
+  label : String
+  order : Int
+} derive(Eq, @debug.Debug)
+pub fn DatumReference::new(String, Int) -> Self
 
 pub struct Dimension {
   name : String
@@ -118,6 +362,83 @@ pub enum Distribution {
   NormalApproximation
 } derive(Eq, @debug.Debug)
 
+pub struct FeasibilityReport {
+  nominal : Double
+  window : AcceptanceWindow
+  worst_case_interval : Interval
+  rss_interval : Interval
+  worst_case_margin : Double
+  rss_margin : Double
+  worst_case_passes : Bool
+  rss_passes : Bool
+} derive(Eq, @debug.Debug)
+
+pub struct FeatureControlFrame {
+  mode : GeometricMode
+  tolerance : Double
+  datum_frame : DatumFrame
+} derive(Eq, @debug.Debug)
+pub fn FeatureControlFrame::concentricity(Double, DatumFrame) -> Self
+pub fn FeatureControlFrame::position(Double, DatumFrame) -> Self
+pub fn FeatureControlFrame::runout(Double, DatumFrame) -> Self
+
+pub struct FeatureEvaluation {
+  name : String
+  status : ConstraintStatus
+  deviation : Double
+  margin : Double
+  datum_label : String
+} derive(Eq, @debug.Debug)
+
+pub struct FeatureEvaluationReport {
+  total : Int
+  passed : Int
+  failed : Int
+  evaluations : Array[FeatureEvaluation]
+} derive(Eq, @debug.Debug)
+
+pub struct FeatureMeasurement {
+  name : String
+  nominal : Vector2
+  measured : Vector2
+} derive(Eq, @debug.Debug)
+pub fn FeatureMeasurement::new(String, Vector2, Vector2) -> Self
+
+pub struct FitAnalysis {
+  hole_nominal : Double
+  shaft_nominal : Double
+  nominal_clearance : Double
+  minimum_clearance : Double
+  maximum_clearance : Double
+  classification : FitClassification
+} derive(Eq, @debug.Debug)
+pub fn FitAnalysis::accepts(Self, Interval) -> Bool
+pub fn FitAnalysis::clearance(Self) -> Interval
+pub fn FitAnalysis::guarantees_clearance(Self, Double) -> Bool
+pub fn FitAnalysis::limits_clearance(Self, Double) -> Bool
+pub fn FitAnalysis::margin(Self, Interval) -> Double
+
+pub enum FitClassification {
+  Clearance
+  Transition
+  Interference
+} derive(Eq, @debug.Debug)
+
+pub struct FitRequirement {
+  name : String
+  minimum_clearance : Double
+  maximum_clearance : Double
+} derive(Eq, @debug.Debug)
+pub fn FitRequirement::evaluate(Self, FitAnalysis) -> ConstraintStatus
+pub fn FitRequirement::new(String, Double, Double) -> Self
+
+pub struct FitRequirementReport {
+  passed : Int
+  failed : Int
+  inconclusive : Int
+  statuses : Array[(String, ConstraintStatus)]
+} derive(Eq, @debug.Debug)
+
 pub struct GapConstraint {
   name : String
   minimum : Double
@@ -125,6 +446,126 @@ pub struct GapConstraint {
 } derive(@debug.Debug)
 pub fn GapConstraint::evaluate(Self, AnalysisResult) -> ConstraintStatus
 pub fn GapConstraint::new(String, Double, Double) -> Self
+
+pub struct GaugeRRReport {
+  part_count : Int
+  operator_count : Int
+  repeat_count : Int
+  total_measurements : Int
+  repeatability : Double
+  reproducibility : Double
+  part_to_part : Double
+  total_variation : Double
+  percent_tolerance : Double
+  ndc : Double
+} derive(Eq, @debug.Debug)
+
+pub enum GeometricMode {
+  Position
+  Concentricity
+  Runout
+} derive(Eq, @debug.Debug)
+
+pub struct GeometricTolerance {
+  mode : GeometricMode
+  zone : Double
+} derive(Eq, @debug.Debug)
+pub fn GeometricTolerance::evaluate(Self, Vector2, Vector2) -> ConstraintStatus
+pub fn GeometricTolerance::new(GeometricMode, Double) -> Self
+
+pub struct Histogram {
+  bins : Array[HistogramBin]
+  total : Int
+  minimum : Double
+  maximum : Double
+} derive(Eq, @debug.Debug)
+pub fn Histogram::bin_for(Self, Double) -> Int
+pub fn Histogram::counted_samples(Self) -> Int
+pub fn Histogram::cumulative_fraction(Self, Double) -> Double
+pub fn Histogram::frequency(Self, Int) -> Int
+pub fn Histogram::percentile(Self, Double) -> Double
+
+pub struct HistogramBin {
+  lower : Double
+  upper : Double
+  count : Int
+} derive(Eq, @debug.Debug)
+
+pub struct InspectionReport {
+  statistics : SampleStatistics
+  window : AcceptanceWindow
+  accepted : Int
+  rejected : Int
+  yield_rate : Double
+  capability : CapabilityReport
+} derive(Eq, @debug.Debug)
+
+pub struct Interval {
+  lower : Double
+  upper : Double
+} derive(Eq, @debug.Debug)
+pub fn Interval::absolute(Self) -> Self
+pub fn Interval::add(Self, Self) -> Self
+pub fn Interval::contains(Self, Double) -> Bool
+pub fn Interval::distance_to(Self, Double) -> Double
+pub fn Interval::divide(Self, Self) -> Self?
+pub fn Interval::hull(Self, Self) -> Self
+pub fn Interval::intersection(Self, Self) -> Self?
+pub fn Interval::intersects(Self, Self) -> Bool
+pub fn Interval::midpoint(Self) -> Double
+pub fn Interval::mul(Self, Self) -> Self
+pub fn Interval::negate(Self) -> Self
+pub fn Interval::new(Double, Double) -> Self
+pub fn Interval::point(Double) -> Self
+pub fn Interval::scale(Self, Double) -> Self
+pub fn Interval::sub(Self, Self) -> Self
+pub fn Interval::width(Self) -> Double
+
+pub struct IntervalVector2 {
+  x : Interval
+  y : Interval
+} derive(Eq, @debug.Debug)
+pub fn IntervalVector2::add(Self, Self) -> Self
+pub fn IntervalVector2::magnitude_bounds(Self) -> Interval
+pub fn IntervalVector2::new(Interval, Interval) -> Self
+
+pub struct Length {
+  millimeters : Double
+} derive(Eq, @debug.Debug)
+pub fn Length::add(Self, Self) -> Self
+pub fn Length::from_inches(Double) -> Self
+pub fn Length::from_micrometers(Double) -> Self
+pub fn Length::from_millimeters(Double) -> Self
+pub fn Length::scale(Self, Double) -> Self
+pub fn Length::sub(Self, Self) -> Self
+pub fn Length::to_inches(Self) -> Double
+pub fn Length::to_micrometers(Self) -> Double
+pub fn Length::to_millimeters(Self) -> Double
+
+pub struct LengthTolerance {
+  nominal : Length
+  lower : Length
+  upper : Length
+} derive(Eq, @debug.Debug)
+pub fn LengthTolerance::interval(Self) -> Interval
+pub fn LengthTolerance::symmetric(Length, Length) -> Self
+
+pub struct Matrix2 {
+  m11 : Double
+  m12 : Double
+  m21 : Double
+  m22 : Double
+} derive(Eq, @debug.Debug)
+pub fn Matrix2::apply(Self, Vector2) -> Vector2
+pub fn Matrix2::determinant(Self) -> Double
+pub fn Matrix2::identity() -> Self
+pub fn Matrix2::inverse(Self) -> Self?
+pub fn Matrix2::is_orthonormal(Self) -> Bool
+pub fn Matrix2::multiply(Self, Self) -> Self
+pub fn Matrix2::new(Double, Double, Double, Double) -> Self
+pub fn Matrix2::rotation(Double) -> Self
+pub fn Matrix2::scale(Double, Double) -> Self
+pub fn Matrix2::transpose(Self) -> Self
 
 pub struct ProcessCapability {
   lower_spec : Double
@@ -137,6 +578,17 @@ pub fn ProcessCapability::cpk(Self) -> Double
 pub fn ProcessCapability::cpl(Self) -> Double
 pub fn ProcessCapability::cpu(Self) -> Double
 pub fn ProcessCapability::new(Double, Double, Double, Double) -> Self
+
+pub struct ProcessPerformance {
+  statistics : SampleStatistics
+  accepted : Int
+  rejected : Int
+  lower_defects : Int
+  upper_defects : Int
+  observed_yield : Double
+  defect_rate : Double
+  capability : CapabilityReport
+} derive(Eq, @debug.Debug)
 
 pub struct ProjectedDimension {
   name : String
@@ -155,14 +607,43 @@ pub struct ProjectedResult {
   sensitivity : Array[(String, Double)]
 } derive(@debug.Debug)
 
-pub struct ReferenceVector {
-  dimensions : Int
-  tolerance : Double
-  nominal : Double
-  worst_lower : Double
-  worst_upper : Double
-  rss_sigma : Double
-} derive(@debug.Debug)
+pub enum RoundingMode {
+  Nearest
+  Down
+  Up
+  TowardZero
+} derive(Eq, @debug.Debug)
+
+pub struct RunningStatistics {
+  count : Int
+  mean : Double
+  second_moment : Double
+  minimum : Double
+  maximum : Double
+} derive(Eq, @debug.Debug)
+pub fn RunningStatistics::add(Self, Double) -> Self
+pub fn RunningStatistics::add_all(Self, Array[Double]) -> Self
+pub fn RunningStatistics::finish(Self) -> SampleStatistics
+pub fn RunningStatistics::merge(Self, Self) -> Self
+pub fn RunningStatistics::new() -> Self
+
+pub struct SamplePlan {
+  expected_yield : Double
+  confidence : Double
+  margin : Double
+  z_score : Double
+  samples : Int
+  expected_half_width : Double
+} derive(Eq, @debug.Debug)
+
+pub struct SampleStatistics {
+  count : Int
+  mean : Double
+  variance : Double
+  standard_deviation : Double
+  minimum : Double
+  maximum : Double
+} derive(Eq, @debug.Debug)
 
 pub struct SamplingPolicy {
   distribution : Distribution
@@ -171,14 +652,156 @@ pub struct SamplingPolicy {
 } derive(@debug.Debug)
 pub fn SamplingPolicy::new(distribution? : Distribution, sigma_factor? : Double, seed? : UInt) -> Self
 
-pub struct StandardProfile {
-  code : String
-  family : String
-  nominal_mm : Double
-  tolerance_mm : Double
-  cpk_target : Double
-  sample_count : Int
+pub struct ScenarioComparison {
+  baseline_name : String
+  candidate_name : String
+  nominal_delta : Double
+  standard_deviation_delta : Double
+  yield_delta : Double
+  interval_overlap : Bool
+} derive(Eq, @debug.Debug)
+
+pub enum ScenarioMethod {
+  WorstCase
+  RSS
+  MonteCarlo
+  AcceptanceSimulation
+} derive(Eq, @debug.Debug)
+
+pub struct ScenarioResult {
+  name : String
+  analysis_method : ScenarioMethod
+  nominal : Double
+  lower : Double
+  upper : Double
+  mean : Double
+  standard_deviation : Double
+  yield_rate : Double
+  sensitivity : Array[(String, Double)]
+} derive(Eq, @debug.Debug)
+pub fn ScenarioResult::interval(Self) -> Interval
+pub fn ScenarioResult::within_window(Self, AcceptanceWindow) -> Bool
+
+pub struct ScenarioSpec {
+  name : String
+  chain : Chain
+  analysis_method : ScenarioMethod
+  samples : Int
+  window : AcceptanceWindow
+  policy : SamplingPolicy
 } derive(@debug.Debug)
+pub fn ScenarioSpec::new(String, Chain, ScenarioMethod, Int, AcceptanceWindow) -> Self
+pub fn ScenarioSpec::with_policy(Self, SamplingPolicy) -> Self
+
+pub struct SensitivityItem {
+  name : String
+  contribution : Double
+  fraction : Double
+} derive(Eq, @debug.Debug)
+
+pub struct SimulationSummary {
+  nominal : Double
+  minimum : Double
+  maximum : Double
+  mean : Double
+  standard_deviation : Double
+  yield_rate : Double
+  samples : Int
+  sensitivity : Array[(String, Double)]
+} derive(@debug.Debug)
+
+pub struct Specification {
+  lower : Double
+  upper : Double
+  nominal : Double
+} derive(Eq, @debug.Debug)
+pub fn Specification::classify(Self, Double) -> SpecificationStatus
+pub fn Specification::contains(Self, Double) -> Bool
+pub fn Specification::margin(Self, Double) -> Double
+pub fn Specification::new(Double, Double, Double) -> Self
+pub fn Specification::window(Self) -> AcceptanceWindow
+
+pub struct SpecificationReport {
+  count : Int
+  accepted : Int
+  lower_failures : Int
+  upper_failures : Int
+  yield_rate : Double
+  mean_margin : Double
+} derive(Eq, @debug.Debug)
+
+pub enum SpecificationStatus {
+  BelowLower
+  WithinSpecification
+  AboveUpper
+} derive(Eq, @debug.Debug)
+
+pub struct TighteningItem {
+  name : String
+  current_tolerance : Double
+  proposed_tolerance : Double
+  expected_reduction : Double
+  priority : Double
+} derive(Eq, @debug.Debug)
+
+pub struct TighteningPlan {
+  current_rss : Double
+  target_rss : Double
+  projected_rss : Double
+  items : Array[TighteningItem]
+} derive(Eq, @debug.Debug)
+pub fn TighteningPlan::largest_reduction(Self) -> TighteningItem
+pub fn TighteningPlan::projected_variance(Self) -> Double
+
+pub struct Transform2 {
+  linear : Matrix2
+  translation : Vector2
+} derive(Eq, @debug.Debug)
+pub fn Transform2::apply(Self, Vector2) -> Vector2
+pub fn Transform2::compose(Self, Self) -> Self
+pub fn Transform2::inverse(Self) -> Self?
+pub fn Transform2::new(Matrix2, Vector2) -> Self
+
+pub struct TrendReport {
+  count : Int
+  slope : Double
+  intercept : Double
+  r_squared : Double
+} derive(Eq, @debug.Debug)
+
+pub struct UncertaintyBudget {
+  contributors : Array[UncertaintyContribution]
+  combined : Double
+  total_variance : Double
+} derive(Eq, @debug.Debug)
+pub fn UncertaintyBudget::interval(Self, Double, Double) -> Interval
+pub fn UncertaintyBudget::largest(Self) -> UncertaintyContribution
+pub fn UncertaintyBudget::ranked(Self) -> Array[UncertaintyContribution]
+
+pub struct UncertaintyContribution {
+  name : String
+  effective_uncertainty : Double
+  variance : Double
+  fraction : Double
+} derive(Eq, @debug.Debug)
+
+pub struct UncertaintySource {
+  name : String
+  standard_uncertainty : Double
+  sensitivity : Double
+} derive(Eq, @debug.Debug)
+pub fn UncertaintySource::new(String, Double, Double) -> Self
+
+pub struct ValidationIssue {
+  scope : String
+  message : String
+} derive(Eq, @debug.Debug)
+
+pub struct ValidationReport {
+  valid : Bool
+  issue_count : Int
+  issues : Array[ValidationIssue]
+} derive(Eq, @debug.Debug)
 
 pub struct Vector2 {
   x : Double
@@ -193,6 +816,14 @@ pub fn Vector2::normalize(Self) -> Self
 pub fn Vector2::scale(Self, Double) -> Self
 pub fn Vector2::sub(Self, Self) -> Self
 pub fn Vector2::zero() -> Self
+
+pub struct YieldEstimate {
+  accepted : Int
+  total : Int
+  rate : Double
+  lower_bound : Double
+  upper_bound : Double
+} derive(Eq, @debug.Debug)
 
 // Type aliases
 

@@ -10,7 +10,7 @@ fn main {
   println("3-sigma interval = [\{result.lower}, \{result.upper}]")
   println("benchmark samples = 10000")
   for case in @lib.benchmark_suite() {
-    let benchmark = @lib.run_benchmark_case(case, 10000)
+    let benchmark = @lib.run_acceptance_benchmark_case(case, 10000)
     println(
       "\{case.name}: mean=\{benchmark.mean}, sigma=\{benchmark.standard_deviation}, yield=\{benchmark.yield_rate}",
     )
