@@ -5,7 +5,7 @@ fn csv_number(value : Double) -> String {
 
 ///|
 pub fn simulation_to_csv(summary : SimulationSummary) -> String {
-  let builder = StringBuilder::new()
+  let builder = StringBuilder()
   builder.write_string(
     "nominal,minimum,maximum,mean,standard_deviation,yield_rate,samples\n",
   )
@@ -27,7 +27,7 @@ pub fn simulation_to_csv(summary : SimulationSummary) -> String {
 
 ///|
 pub fn capability_to_csv(report : CapabilityReport) -> String {
-  let builder = StringBuilder::new()
+  let builder = StringBuilder()
   builder.write_string("cp,cpu,cpl,cpk,observed_yield,count\n")
   builder.write_string("\{report.cp},\{report.cpu},\{report.cpl},")
   builder.write_string("\{report.cpk},\{report.observed_yield},")
@@ -38,7 +38,7 @@ pub fn capability_to_csv(report : CapabilityReport) -> String {
 ///|
 /// Serialize a scenario result for downstream comparison reports.
 pub fn scenario_to_csv(result : ScenarioResult) -> String {
-  let builder = StringBuilder::new()
+  let builder = StringBuilder()
   builder.write_string(
     "name,nominal,lower,upper,mean,standard_deviation,yield_rate\n",
   )
@@ -53,7 +53,7 @@ pub fn scenario_to_csv(result : ScenarioResult) -> String {
 ///|
 /// Serialize histogram bins as a stable CSV table.
 pub fn histogram_to_csv(value : Histogram) -> String {
-  let builder = StringBuilder::new()
+  let builder = StringBuilder()
   builder.write_string("lower,upper,count\n")
   for bin in value.bins {
     builder.write_string("\{bin.lower},\{bin.upper},\{bin.count}\n")
@@ -64,7 +64,7 @@ pub fn histogram_to_csv(value : Histogram) -> String {
 ///|
 /// Serialize an allocation plan as a stable CSV table.
 pub fn allocation_to_csv(report : AllocationReport) -> String {
-  let builder = StringBuilder::new()
+  let builder = StringBuilder()
   builder.write_string("name,nominal,allocated_tolerance,variance_fraction\n")
   for item in report.items {
     builder.write_string(
@@ -77,7 +77,7 @@ pub fn allocation_to_csv(report : AllocationReport) -> String {
 ///|
 /// Serialize uncertainty contributions as a stable CSV table.
 pub fn uncertainty_to_csv(budget : UncertaintyBudget) -> String {
-  let builder = StringBuilder::new()
+  let builder = StringBuilder()
   builder.write_string("name,effective_uncertainty,variance,fraction\n")
   for contributor in budget.contributors {
     builder.write_string(
@@ -90,7 +90,7 @@ pub fn uncertainty_to_csv(budget : UncertaintyBudget) -> String {
 ///|
 /// Serialize the complete fit range and classification.
 pub fn fit_to_csv(fit : FitAnalysis) -> String {
-  let builder = StringBuilder::new()
+  let builder = StringBuilder()
   builder.write_string(
     "hole_nominal,shaft_nominal,nominal_clearance,minimum_clearance,maximum_clearance\n",
   )
